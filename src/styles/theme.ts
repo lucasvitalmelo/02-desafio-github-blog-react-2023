@@ -16,12 +16,13 @@ export const defaultTheme = {
   },
   font: {
     sizes: {
-      xs: '0.75rem',
-      sm: '0.875rem',
-      md: '1rem',
-      lg: '1.125rem',
-      xl: '1.25rem',
-      '2xl': '1.5rem',
+      xs: '0.75rem', // 12px
+      sm: '0.875rem', // 14px
+      md: '1rem', // 16px
+      lg: '1.125rem', // 18px
+      xl: '1.25rem', // 20px
+      '2xl': '1.5rem', // 24px
     },
+    
   },
 } as const
