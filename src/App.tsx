@@ -1,16 +1,21 @@
-import { ThemeProvider } from 'styled-components'
-import { defaultTheme } from './styles/theme'
-import { GlobalStyle } from './styles/global'
-import { BrowserRouter } from 'react-router-dom'
-import { Router } from './Router'
+import 'react-toastify/dist/ReactToastify.css'
+
+import { Route, Routes } from 'react-router-dom'
+import { DefaultLayout } from './layout/Default'
+import { Providers } from './providers'
+
+import { Home } from './pages/Home'
+import { Post } from './pages/Post'
 
 export function App() {
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={defaultTheme}>
-        <Router />
-        <GlobalStyle />
-      </ThemeProvider>
-    </BrowserRouter>
+    <Providers>
+      <Routes>
+        <Route path="/" element={<DefaultLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/Post" element={<Post />} />
+        </Route>
+      </Routes>
+    </Providers>
   )
 }

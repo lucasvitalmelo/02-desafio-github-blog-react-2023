@@ -2,6 +2,7 @@ import {
   FooterProfileContainer,
   ImageProfile,
   InfosProfileContainer,
+  LoadAnimated,
   ProfileContainer,
   TitleProfileContainer
 } from "./styles"
@@ -14,40 +15,65 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { GetUserResponse } from "../../services/github";
 
-export function Profile() {
+interface ProfileProps {
+  user?: GetUserResponse
+}
+
+export function Profile({ user }: ProfileProps) {
   return (
+
     <ProfileContainer>
-      <ImageProfile src="https://avatars.githubusercontent.com/lucasvitalmelo" />
 
-      <InfosProfileContainer>
+      {user ?
+        (
+          <>
+            <ImageProfile src={user.avatar_url} />
 
-        <div>
-          <TitleProfileContainer>
-            <h1>Lucas Vital de Melo</h1>
-            <a href=""> github  <FontAwesomeIcon icon={faArrowUpRightFromSquare} /> </a>
-          </TitleProfileContainer>
+            <InfosProfileContainer>
 
-          <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass.</p>
-        </div>
+              <div>
+                <TitleProfileContainer>
+                  <h1>{user.name}</h1>
+                  <a href={user.html_url}> github  <FontAwesomeIcon icon={faArrowUpRightFromSquare} /> </a>
+                </TitleProfileContainer>
 
-        <FooterProfileContainer>
-          <a href="">
-            <FontAwesomeIcon icon={faGithub} />
+                <p>{user.bio}</p>
+              </div>
 
-            lucasvitalmelo
-          </a>
-          <a href="">
-            <FontAwesomeIcon icon={faBuilding} />
-            Cromai
-          </a>
-          <p>
-            <FontAwesomeIcon icon={faUserGroup} />
-            32 seguidores
-          </p>
-        </FooterProfileContainer>
+              <FooterProfileContainer>
+                <a href="">
+                  <FontAwesomeIcon icon={faGithub} />
 
-      </InfosProfileContainer>
+                  {user.login}
+                </a>
+
+                <span>
+                  <FontAwesomeIcon icon={faBuilding} />
+                  <p>
+                    {user.company}
+                  </p>
+                </span>
+                <span>
+                  <FontAwesomeIcon icon={faUserGroup} />
+                  <p>
+                    {user.following} seguidores
+                  </p>
+                </span>
+              </FooterProfileContainer>
+
+            </InfosProfileContainer>
+          </>
+        )
+        :
+        (
+          <LoadAnimated>
+            <div />
+          </LoadAnimated>
+        )
+      }
+
     </ProfileContainer>
 
   )

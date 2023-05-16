@@ -1,17 +1,14 @@
 import styled from "styled-components";
 
 export const ProfileContainer = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  width:  100%;
-  height: 13.25rem;
+  height: 212px;
   padding: 2rem;
-  gap: 2rem;
-
+  padding-left: 2.5rem;
+  background: ${({ theme }) => theme.colors.profile};
+  box-shadow: 0 0.125rem 1.75rem rgba(0, 0, 0, 0.2);
   border-radius: 0.625rem;
-  background: ${props => props.theme.colors.profile};   
+  display: flex;
+  gap: 2rem;
 `
 
 export const InfosProfileContainer = styled.div`
@@ -67,19 +64,17 @@ export const FooterProfileContainer = styled.footer`
   display: flex;
   gap: 24px;
 
-  > a, p {
+  > a, span {
     display: flex;
     align-items: center;
     gap: 8px;
 
-    text-transform:  uppercase;
-    font-weight: 700;
-    font-size: small;
-    color: ${props => props.theme.colors.subtitle};
-
     text-decoration: none;
+    color: ${props => props.theme.colors.subtitle};
     
     > svg {
+      width: 1.125rem;
+      height: 1.125rem;
       color: ${props => props.theme.colors.label};  
     }
   }
@@ -88,5 +83,50 @@ export const FooterProfileContainer = styled.footer`
     transition: 0.2s;
     opacity: 0.8;
   }
+`
 
+export const LoadAnimated = styled.div`
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+
+  > div {
+  position: absolute;
+  border: 4px solid ${props => props.theme.colors.label};
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  4.9% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  5% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
 `

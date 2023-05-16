@@ -1,26 +1,27 @@
-import { Post } from "../../components/Post"
-import { Profile } from "../../components/Profile"
-import { MainContainer, PostsContainer, PublicationsHeader, SearchPublicationsInput } from "./styles"
-
+import { Profile } from '../../components/Profile'
+import { PostsContainer } from './styles'
+import { SearchPublications } from '../../components/SearchPublications'
+import { useGetUser } from '../../hooks/queries/use-get-user'
+import { useSearchIssues } from '../../hooks/queries/use-search-issues'
+import { useState } from 'react'
+import { PostCard } from '../../components/PostCard'
 
 export function Home() {
+  const [search, setSearch] = useState('')
+
+  const { data: user } = useGetUser()
+  const { data: issues } = useSearchIssues(search)
   return (
-    <MainContainer>
-      <Profile/>
+    <>
+      <Profile user={user} />
 
-      <PublicationsHeader>
-        <p>publicações</p>
-        <span>6 publicações</span>
-      </PublicationsHeader>
-
-      <SearchPublicationsInput type="text" placeholder="Buscar conteúdo"/>
+      <SearchPublications onChange={setSearch} />
 
       <PostsContainer>
-        <Post/>
-        <Post/>
-        <Post/>
+        {issues?.items.map((item) => (
+          <PostCard key={item.id} post={item} />
+        ))}
       </PostsContainer>
-
-    </MainContainer>
+    </>
   )
 }
