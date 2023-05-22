@@ -13,7 +13,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/Post" element={<Post />} />
+          <Route path="/post/:number" element={<Post />} />
         </Route>
       </Routes>
     </Providers>

@@ -61,3 +61,19 @@ export async function searchIssues(
 
   return data
 }
+
+export async function getIssueByNumber(
+  username: string,
+  repo: string,
+  number: number,
+  options?: { signal?: AbortSignal },
+) {
+  const { data } = await api.get<Item>(
+    `/repos/${username}/${repo}/issues/${number}`,
+    {
+      ...options,
+    },
+  )
+
+  return data
+}
